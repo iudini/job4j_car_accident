@@ -17,14 +17,18 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th>id</th>
                     <th>Name</th>
+                    <th>Text</th>
+                    <th>Address</th>
                 </tr>
             </thead>
-            <c:forEach items="${users}" var="user" varStatus="сounter">
+            <c:forEach items="${accidents}" var="acc">
                 <tr>
-                    <td>${сounter.count}</td>
-                    <td>${user}</td>
+                    <td>${acc.value.id}</td>
+                    <td>${acc.value.name}</td>
+                    <td>${acc.value.text}</td>
+                    <td>${acc.value.address}</td>
                 </tr>
             </c:forEach>
         </table>
