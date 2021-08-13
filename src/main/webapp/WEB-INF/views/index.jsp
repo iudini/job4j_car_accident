@@ -25,10 +25,10 @@
             </thead>
             <c:forEach items="${accidents}" var="acc">
                 <tr>
-                    <td>${acc.value.id}</td>
-                    <td>${acc.value.name}</td>
-                    <td>${acc.value.text}</td>
-                    <td>${acc.value.address}</td>
+                    <td>${acc.id}</td>
+                    <td>${acc.name}</td>
+                    <td>${acc.text}</td>
+                    <td>${acc.address}</td>
                 </tr>
             </c:forEach>
         </table>
