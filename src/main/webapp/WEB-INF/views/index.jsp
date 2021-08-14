@@ -33,7 +33,7 @@
                     <td>${acc.name}</td>
                     <td>${acc.text}</td>
                     <td>${acc.address}</td>
-                    <td><a href="/accident/<c:url value='${acc.id}'/>">Update</a></td>
+                    <td><span><a href="<c:url value='/update?id=${acc.id}'/>">Редактировать инцидент</a></span></td>
                 </tr>
             </c:forEach>
         </table>

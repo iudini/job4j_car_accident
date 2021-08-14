@@ -6,6 +6,7 @@ import ru.job4j.accident.model.Accident;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
@@ -31,8 +32,8 @@ public class AccidentMem {
         accidents.put(accident.getId(), accident);
     }
 
-    public Accident find(int id) {
-        return accidents.get(id);
+    public Optional<Accident> findById(int id) {
+        return Optional.of(accidents.get(id));
     }
 
     public void update(Accident accident) {
