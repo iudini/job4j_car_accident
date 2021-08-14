@@ -14,6 +14,9 @@
 </head>
 <body>
     <div class="container">
+        <div>
+            <a href="<c:url value='/create'/>">Добавить инцидент</a>
+        </div>
         <table class="table">
             <thead>
                 <tr>
@@ -21,6 +24,7 @@
                     <th>Name</th>
                     <th>Text</th>
                     <th>Address</th>
+                    <th>Update</th>
                 </tr>
             </thead>
             <c:forEach items="${accidents}" var="acc">
@@ -29,6 +33,7 @@
                     <td>${acc.name}</td>
                     <td>${acc.text}</td>
                     <td>${acc.address}</td>
+                    <td><a href="/accident/<c:url value='${acc.id}'/>">Update</a></td>
                 </tr>
             </c:forEach>
         </table>
