@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 
 @Repository
 public class AccidentMem {
-    private Map<Integer, Accident> accidents = new HashMap<>();
-    private Map<Integer, AccidentType> types = new HashMap<>();
-    private Map<Integer, Rule> rules = new HashMap<>();
-    AtomicInteger index = new AtomicInteger(1);
+    private final Map<Integer, Accident> accidents = new HashMap<>();
+    private final Map<Integer, AccidentType> types = new HashMap<>();
+    private final Map<Integer, Rule> rules = new HashMap<>();
+    private final AtomicInteger index = new AtomicInteger(1);
 
     public AccidentMem() {
         rules.put(1, Rule.of(1, "Статья. 1"));
