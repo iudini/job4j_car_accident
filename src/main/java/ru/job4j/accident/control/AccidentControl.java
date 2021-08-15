@@ -6,20 +6,18 @@ import org.springframework.web.bind.annotation.*;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
+import ru.job4j.accident.repository.AccidentJdbcTemplate;
 import ru.job4j.accident.repository.AccidentMem;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 
 @Controller
 public class AccidentControl {
-    private final AccidentMem accidents;
+    private final AccidentJdbcTemplate accidents;
 
-    public AccidentControl(AccidentMem accidents) {
+    public AccidentControl(AccidentJdbcTemplate accidents) {
         this.accidents = accidents;
     }
 
@@ -47,5 +45,12 @@ public class AccidentControl {
         Collection<Rule> rules = accidents.getRules();
         model.addAttribute("rules", rules);
         return "accident/edit";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute Accident accident, HttpServletRequest req) {
+        String[] ids = req.getParameterValues("rIds");
+        accidents.update(accident, ids);
+        return "redirect:/";
     }
 }

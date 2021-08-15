@@ -6,7 +6,7 @@
     <div>
         <a href="<c:url value='/'/>">Главная</a>
     </div>
-    <form  action="<c:url value='/save?id=${accident.id}'/>" method='POST'>
+    <form  action="<c:url value='/update?id=${accident.id}'/>" method='POST'>
         <table>
             <tr>
                 <td>Название:</td>
@@ -36,7 +36,7 @@
                 <td>
                     <select name="rIds" multiple>
                         <c:forEach var="rule" items="${rules}" >
-                            <option value="${rule.id}">
+                            <option value="${rule.id}" <c:if test="${accident.ruleInside(rule.id)}">selected</c:if>>
                                     ${rule.name}
                             </option>
                         </c:forEach>
