@@ -25,6 +25,7 @@
                     <th>Text</th>
                     <th>Address</th>
                     <th>Type</th>
+                    <th>Rules</th>
                     <th>Update</th>
                 </tr>
             </thead>
@@ -35,6 +36,11 @@
                     <td>${acc.text}</td>
                     <td>${acc.address}</td>
                     <td>${acc.type.name}</td>
+                    <td>
+                        <c:forEach var="rule" items="${acc.rules}">
+                            <span id="${rule.id}">${rule.name}</span>
+                        </c:forEach>
+                    </td>
                     <td><span><a href="<c:url value='/update?id=${acc.id}'/>">Редактировать инцидент</a></span></td>
                 </tr>
             </c:forEach>

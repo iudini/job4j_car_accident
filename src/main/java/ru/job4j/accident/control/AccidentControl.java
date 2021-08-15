@@ -5,9 +5,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
+import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.repository.AccidentMem;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -22,12 +27,15 @@ public class AccidentControl {
     public String create(Model model) {
         Collection<AccidentType> types = accidents.getTypes();
         model.addAttribute("types", types);
+        Collection<Rule> rules = accidents.getRules();
+        model.addAttribute("rules", rules);
         return "accident/create";
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute Accident accident) {
-        accidents.create(accident);
+    public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
+        String[] ids = req.getParameterValues("rIds");
+        accidents.create(accident, ids);
         return "redirect:/";
     }
 
@@ -36,6 +44,8 @@ public class AccidentControl {
         accidents.findById(id).ifPresent(value -> model.addAttribute("accident", value));
         Collection<AccidentType> types = accidents.getTypes();
         model.addAttribute("types", types);
+        Collection<Rule> rules = accidents.getRules();
+        model.addAttribute("rules", rules);
         return "accident/edit";
     }
 }
