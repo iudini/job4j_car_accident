@@ -7,8 +7,7 @@ import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.repository.AccidentHibernate;
-import ru.job4j.accident.repository.AccidentJdbcTemplate;
-import ru.job4j.accident.repository.AccidentMem;
+import ru.job4j.accident.service.AccidentService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
@@ -16,17 +15,17 @@ import java.util.Collection;
 
 @Controller
 public class AccidentControl {
-    private final AccidentHibernate accidents;
+    private final AccidentService service;
 
-    public AccidentControl(AccidentHibernate accidents) {
-        this.accidents = accidents;
+    public AccidentControl(AccidentService service) {
+        this.service = service;
     }
 
     @GetMapping("/create")
     public String create(Model model) {
-        Collection<AccidentType> types = accidents.getTypes();
+        Collection<AccidentType> types = service.getTypes();
         model.addAttribute("types", types);
-        Collection<Rule> rules = accidents.getRules();
+        Collection<Rule> rules = service.getRules();
         model.addAttribute("rules", rules);
         return "accident/create";
     }
@@ -34,16 +33,16 @@ public class AccidentControl {
     @PostMapping("/save")
     public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
         String[] ids = req.getParameterValues("rIds");
-        accidents.create(accident, ids);
+        service.create(accident, ids);
         return "redirect:/";
     }
 
     @GetMapping("/update")
     public String update(@RequestParam("id") int id, Model model) {
-        accidents.findById(id).ifPresent(value -> model.addAttribute("accident", value));
-        Collection<AccidentType> types = accidents.getTypes();
+        service.findById(id).ifPresent(value -> model.addAttribute("accident", value));
+        Collection<AccidentType> types = service.getTypes();
         model.addAttribute("types", types);
-        Collection<Rule> rules = accidents.getRules();
+        Collection<Rule> rules = service.getRules();
         model.addAttribute("rules", rules);
         return "accident/edit";
     }
@@ -51,7 +50,7 @@ public class AccidentControl {
     @PostMapping("/update")
     public String update(@ModelAttribute Accident accident, HttpServletRequest req) {
         String[] ids = req.getParameterValues("rIds");
-        accidents.update(accident, ids);
+        service.update(accident, ids);
         return "redirect:/";
     }
 }
