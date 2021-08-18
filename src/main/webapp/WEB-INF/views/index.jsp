@@ -15,6 +15,12 @@
 <body>
     <div class="container">
         <div>
+            Login as : ${user.username}
+        </div>
+        <div>
+            <a href="${pageContext.request.contextPath}/logout">logout</a>
+        </div>
+        <div>
             <a href="<c:url value='/create'/>">Добавить инцидент</a>
         </div>
         <table class="table">
